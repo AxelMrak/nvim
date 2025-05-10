@@ -1,0 +1,27 @@
+{
+  "nativeMCPServers": [],
+  "mcpServers": {
+    "filesystem": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/axelmrak/Developer/"
+      ],
+      "command": "npx"
+    },
+    "codegen": {
+      "command": "uvx",
+      "args": ["mcp-server-codegen"],
+      "env": {
+        "OPENAI_KEY": "${ENV_YOUR_OPENAI_KEY}",
+        "COPILOT_KEY": "${ENV_YOUR_COPILOT_KEY}",
+        "GEMINI_KEY": "${ENV_YOUR_GEMINI_KEY}"
+      }
+    },
+    "github.com/AgentDeskAI/browser-tools-mcp": {
+      "command": "npx",
+      "args": ["@agentdeskai/browser-tools-mcp@latest"],
+      "disabled": true
+    }
+  }
+}
