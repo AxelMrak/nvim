@@ -9,8 +9,8 @@ return {
         color_overrides = {
           all = {
             base = "#000000",
-            crust = "#0d0c1d",
-            mantle = "#0d0c1d",
+            crust = "#000000",
+            mantle = "#000000",
           },
         },
       })

@@ -9,8 +9,12 @@ return {
         disable_messages = true,
         system_prompt = function()
           local hub = require("mcphub").get_hub_instance()
-          return hub:get_active_servers_prompt() -- Dynamic prompt with available tools
+          return hub:get_active_servers_prompt()
         end,
+        cursor_applying_provider = " copilot",
+        behaviour = {
+          enable_cursor_planning_mode = true,
+        },
         custom_tools = {
           require("mcphub.extensions.avante").mcp_tool(),
         },
@@ -28,6 +32,8 @@ return {
       "ibhagwan/fzf-lua", -- for file_selector provider fzf
       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
       "zbirenbaum/copilot.lua", -- for providers='copilot'
+      "zbirenbaum/copilot-cmp", -- for autocompletion
+
       {
         -- support for image pasting
         "HakonHarnes/img-clip.nvim",
