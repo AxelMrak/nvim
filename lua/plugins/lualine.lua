@@ -5,11 +5,11 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- Optional: for file icons
     opts = {
       options = {
-        theme = "iceberg_dark", -- Automatically adjust theme based on colorscheme
+        theme = "ayu_dark", -- Automatically adjust theme based on colorscheme
         globalstatus = true, -- Use a global statusline
         icons_enabled = true, -- Enable icons
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        component_separators = { left = "|", right = "|" },
+        section_separators = { left = " ", right = " " },
       },
       sections = {
         lualine_a = { "mode" },

@@ -9,7 +9,7 @@ return {
         disable_messages = true,
         system_prompt = function()
           local hub = require("mcphub").get_hub_instance()
-          return hub:get_active_servers_prompt()
+          return hub and hub:get_active_servers_prompt() or ""
         end,
         cursor_applying_provider = " copilot",
         behaviour = {
@@ -31,9 +31,7 @@ return {
       "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
       "ibhagwan/fzf-lua", -- for file_selector provider fzf
       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
-      "zbirenbaum/copilot-cmp", -- for autocompletion
-
+      "github/copilot.vim",
       {
         -- support for image pasting
         "HakonHarnes/img-clip.nvim",

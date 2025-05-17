@@ -1,7 +1,7 @@
 local opt = vim.opt
 opt.termguicolors = true
 opt.wrap = true
-
+opt.linebreak = true
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
@@ -10,8 +10,6 @@ opt.termguicolors = true
 
 opt.scrolloff = 8
 opt.sidescrolloff = 8
-opt.wrap = false
-opt.linebreak = true
 
 opt.tabstop = 2
 opt.shiftwidth = 2
@@ -36,7 +34,10 @@ opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 opt.laststatus = 3
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = {
+    spacing = 4,
+    wrap = true,
+  },
   signs = true,
   underline = true,
   update_in_insert = false,

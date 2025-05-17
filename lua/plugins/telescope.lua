@@ -52,6 +52,13 @@ return {
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
         winblend = 0,
+        prompt_prefix = "🔍 ",
+        selection_caret = "➤ ",
+        entry_prefix = "  ",
+        initial_mode = "insert",
+        selection_strategy = "reset",
+        scroll_strategy = "cycle",
+        path_display = { "truncate" },
       },
     },
     config = function(_, opts)

@@ -4,7 +4,7 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = {
       enable = true, -- Enable this plugin (can be toggled later)
-      max_lines = 3, -- Maximum lines to show for context
+      max_lines = 2, -- Maximum lines to show for context
       trim_scope = "outer", -- Discard outer context if max_lines is exceeded
       mode = "cursor", -- Calculate context based on cursor position
       separator = "-", -- Separator between context and content

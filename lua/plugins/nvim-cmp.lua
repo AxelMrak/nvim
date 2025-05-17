@@ -6,11 +6,18 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "L3MON4D3/LuaSnip",
+      "tailwind-tools",
+      {
+        "onsails/lspkind-nvim",
+        lazy = true,
+      },
     },
     opts = function(_, opts)
       local cmp = require("cmp")
 
       table.insert(opts.sources, { name = "emoji" })
+
+      local has_lspkind, lspkind = pcall(require, "lspkind")
 
       opts.mapping = {
         ["<Tab>"] = cmp.mapping.confirm({ select = true }),
@@ -22,6 +29,16 @@ return {
         ["<Up>"] = cmp.mapping.select_prev_item(),
         ["<Down>"] = cmp.mapping.select_next_item(),
       }
+
+      if has_lspkind then
+        opts.formatting = {
+          format = lspkind.cmp_format({
+            before = require("tailwind-tools.cmp").lspkind_format,
+          }),
+        }
+      end
+
+      return opts
     end,
   },
 }
