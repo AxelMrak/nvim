@@ -4,7 +4,7 @@ return {
     config = function()
       local codewindow = require("codewindow")
       codewindow.setup({
-        auto_enable = true,
+        auto_enable = false,
         exclude_filetypes = { "NvimTree", "packer" },
         use_treesitter = true,
         use_lsp = true,
