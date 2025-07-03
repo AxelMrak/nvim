@@ -47,17 +47,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "InsertEnter", "FocusLost" }, {
-  callback = function()
-    vim.wo.relativenumber = false
-  end,
-})
-vim.api.nvim_create_autocmd({ "InsertLeave", "FocusGained" }, {
-  callback = function()
-    vim.wo.relativenumber = true
-  end,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "gitcommit" },
   callback = function()
@@ -80,5 +69,11 @@ vim.api.nvim_create_autocmd("User", {
       engage.conflict_buster()
       create_buffer_local_mappings()
     end)
+  end,
+})
+
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focusable = false, source = "if_many" })
   end,
 })
