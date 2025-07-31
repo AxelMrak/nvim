@@ -27,6 +27,7 @@ require("lazy").setup({
           stages = "fade_in_slide_out",
           background_colour = "FloatShadow",
           timeout = 3000,
+          merge_duplicates = true,
         })
         vim.notify = notify
       end,

@@ -19,7 +19,7 @@ return {
       "marksman", -- For Markdown
       "json-lsp", -- For JSON
       "yaml-language-server", -- For YAML
-      "dockerls", -- For Dockerfile
+      "dockerfile-language-server", -- For Dockerfile
       "tailwindcss-language-server", -- For TailwindCSS
       "gopls", -- For Go
       "vscode-html-languageserver", -- For HTML
