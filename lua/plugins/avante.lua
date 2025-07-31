@@ -7,8 +7,11 @@ return {
       provider = "copilot",
       providers = {
         copilot = {
-          model = "claude-sonnet-4",
+          model = "gpt-4.1",
         },
+      },
+      behaviour = {
+        enable_fastapply = true, -- Enable Fast Apply feature
       },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

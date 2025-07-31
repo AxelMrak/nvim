@@ -2,7 +2,7 @@ return {
   {
     "ChuufMaster/buffer-vacuum",
     opts = {
-      max_buffers = 5,
+      max_buffers = 6,
     },
   },
 }

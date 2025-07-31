@@ -17,9 +17,9 @@ return {
           "intelephense", -- PHP
           "lua_ls",       -- Lua
           "pyright",      -- Python
-          "vtsls",        -- TypeScript/JavaScript
           "bashls",       -- Bash
           "jsonls",       -- JSON
+          "biome",        -- Biome (JavaScript/TypeScript)
         },
         automatic_installation = true,
       })

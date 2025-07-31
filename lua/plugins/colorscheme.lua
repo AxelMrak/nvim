@@ -8,9 +8,9 @@ return {
         transparent_background = false,
         color_overrides = {
           all = {
-            base = "#000000",
-            crust = "#000000",
-            mantle = "#000401",
+            base = "#080808",
+            crust = "#1B1B1B",
+            mantle = "#0C0C0C",
           },
         },
       })

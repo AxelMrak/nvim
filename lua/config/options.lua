@@ -35,7 +35,7 @@ opt.laststatus = 3
 
 vim.diagnostic.config({
   virtual_text = {
-    spacing = 4,
+    spacing = 3,
     wrap = true,
   },
   signs = true,
