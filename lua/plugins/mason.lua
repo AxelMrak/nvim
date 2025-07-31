@@ -22,9 +22,6 @@ return {
       "dockerfile-language-server", -- For Dockerfile
       "tailwindcss-language-server", -- For TailwindCSS
       "gopls", -- For Go
-      "vscode-html-languageserver", -- For HTML
-      "vscode-css-languageserver", -- For CSS
-      "lua_ls", -- For Lua
     },
   },
 }
