@@ -4,11 +4,12 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim", -- Required dependency
       "nvim-tree/nvim-web-devicons", -- Optional for file icons
-      "nvim-telescope/telescope-fzf-native.nvim", -- Optional for improved sorting performance
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        -- This is needed to ensure the fzf binary is built when installing the plugin
+        build = "make",
+      },
     },
-    build = function()
-      pcall(require("telescope").load_extension, "fzf")
-    end,
     keys = {
       {
         "<leader>ff",
@@ -46,6 +47,13 @@ return {
         desc = "Find Plugin File",
       },
     },
+    config = function(_, opts)
+      local telescope = require("telescope")
+      telescope.setup(opts)
+
+      -- Load fzf-native extension if installed
+      pcall(telescope.load_extension, "fzf")
+    end,
     opts = {
       defaults = {
         layout_strategy = "horizontal",
@@ -61,12 +69,5 @@ return {
         path_display = { "truncate" },
       },
     },
-    config = function(_, opts)
-      local telescope = require("telescope")
-      telescope.setup(opts)
-
-      -- Load fzf-native extension if installed
-      pcall(telescope.load_extension, "fzf")
-    end,
   },
 }
