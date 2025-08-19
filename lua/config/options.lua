@@ -43,3 +43,5 @@ vim.diagnostic.config({
   update_in_insert = false,
   severity_sort = true,
 })
+
+vim.lsp.set_log_level("error")
