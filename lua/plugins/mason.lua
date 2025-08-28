@@ -29,6 +29,8 @@ return {
         "sql-formatter",
         "pint",
         "shfmt",
+        "black",
+        "isort",
 
         -- Linters
         "eslint_d",

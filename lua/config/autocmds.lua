@@ -1,10 +1,3 @@
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function()
-    vim.lsp.buf.format({ async = false })
-  end,
-})
-
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank({ timeout = 200 })
@@ -15,15 +8,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function()
     vim.cmd([[%s/\s\+$//e]])
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufReadPost", {
-  callback = function()
-    local line = vim.fn.line
-    if line("'\"") > 1 and line("'\"") <= line("$") then
-      vim.cmd('normal! g`"')
-    end
   end,
 })
 
@@ -53,22 +37,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.wrap = true
     vim.opt_local.linebreak = true
     vim.opt_local.spell = false
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = "plugins.lua",
-  command = "source <afile> | Lazy sync",
-})
-
-vim.api.nvim_create_autocmd("User", {
-  pattern = "GitConflictDetected",
-  callback = function()
-    vim.notify("Conflict detected in " .. vim.fn.expand("<afile>"))
-    vim.keymap.set("n", "cww", function()
-      engage.conflict_buster()
-      create_buffer_local_mappings()
-    end)
   end,
 })
 

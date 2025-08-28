@@ -10,10 +10,6 @@ return {
   end,
   dependencies = {
     {
-      "nvim-treesitter/nvim-treesitter-context",
-      opts = {},
-    },
-    {
       "nvim-treesitter/nvim-treesitter-textobjects",
       config = function()
         -- When in diff mode, we want to use the default
