@@ -1,16 +1,13 @@
 return {
   {
     "saghen/blink.cmp",
+    enabled = false, -- Use nvim-cmp as the single completion engine
     dependencies = {
       {
         "L3MON4D3/LuaSnip",
         build = "make install_jsregexp",
         config = function()
           local luasnip = require("luasnip")
-
-          -- Loads all the snippets installed by extensions in vscode.
-          -- require('luasnip.loaders.from_vscode').lazy_load()
-          require("luasnip.loaders.from_vscode").load({ paths = "~/.config/nvim/snippets" })
 
           luasnip.config.set_config({
             region_check_events = "InsertEnter",
