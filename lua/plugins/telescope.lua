@@ -16,6 +16,12 @@ return {
   keys = {
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
     { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+    { "<leader>fG", function()
+        require("telescope").extensions.live_grep_args.live_grep_args()
+      end, desc = "Live Grep (args)" },
+    { "<leader>fy", function()
+        require("telescope").extensions.yank_history.yank_history()
+      end, desc = "Yank History" },
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
@@ -116,5 +122,7 @@ return {
 
     -- Load extensions
     pcall(telescope.load_extension, "fzf")
+    pcall(telescope.load_extension, "live_grep_args")
+    pcall(telescope.load_extension, "yank_history")
   end,
 }

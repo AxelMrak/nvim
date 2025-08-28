@@ -8,6 +8,7 @@ return {
       ensure_installed = {
         -- LSP servers
         "typescript-language-server",
+        "vtsls",
         "eslint-lsp",
         "lua-language-server",
         "html-lsp",

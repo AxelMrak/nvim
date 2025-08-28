@@ -20,7 +20,28 @@ return {
       local map = function(mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, { silent = true, buffer = bufnr, desc = "LSP: " .. desc })
       end
-      map("n", "gd", vim.lsp.buf.definition, "Go to Definition")
+      map("n", "gd", function()
+        local params = vim.lsp.util.make_position_params()
+        vim.lsp.buf_request(bufnr, "textDocument/definition", params, function(err, result)
+          if err then
+            vim.notify("LSP definition error: " .. (err.message or tostring(err)), vim.log.levels.ERROR)
+            return
+          end
+          if not result or (type(result) == "table" and vim.tbl_isempty(result)) then
+            vim.notify("No definition found", vim.log.levels.INFO)
+            return
+          end
+          if type(result) == "table" and #result > 1 then
+            local ok, builtin = pcall(require, "telescope.builtin")
+            if ok then
+              builtin.lsp_definitions()
+              return
+            end
+          end
+          local target = (type(result) == "table" and result[1]) and result[1] or result
+          vim.lsp.util.jump_to_location(target, "utf-8")
+        end)
+      end, "Go to Definition")
       map("n", "gr", vim.lsp.buf.references, "Show References")
       map("n", "gD", vim.lsp.buf.declaration, "Go to Declaration")
       map("n", "gI", vim.lsp.buf.implementation, "Go to Implementation")
@@ -49,19 +70,28 @@ return {
 
     -- Server-specific configurations
     local server_configs = {
-      -- TypeScript/JavaScript
-      ts_ls = {
-        init_options = {
-          maxTsServerMemory = 8192,
-          npmLocation = "npm",
-          preferences = {
-            includeInlayParameterNameHints = "all",
-            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
+      -- TypeScript/JavaScript (vtsls)
+      vtsls = {
+        settings = {
+          typescript = {
+            format = { enable = false },
+            preferences = {
+              importModuleSpecifierPreference = "non-relative",
+            },
+            inlayHints = {
+              enumMemberValues = true,
+              functionLikeReturnTypes = true,
+              parameterNames = "all",
+              parameterTypes = true,
+              propertyDeclarationTypes = true,
+              variableTypes = true,
+            },
+          },
+          javascript = {
+            inlayHints = { parameterNames = "all" },
+          },
+          vtsls = {
+            tsserver = { maxTsServerMemory = 8192 },
           },
         },
       },
