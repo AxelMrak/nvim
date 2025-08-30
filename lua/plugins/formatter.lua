@@ -5,12 +5,6 @@ return {
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     opts = {
-      format_on_save = function(bufnr)
-        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-          return
-        end
-        return { lsp_fallback = true, timeout_ms = 500 }
-      end,
       formatters_by_ft = {
         lua = { "stylua" },
         typescript = { "prettierd" },
@@ -26,6 +20,8 @@ return {
         python = { "isort", "black" },
         sh = { "shfmt" },
       },
+      -- LazyVim manages format-on-save. Use :LazyExtras to adjust
+      -- or set vim.g.autoformat = false to disable globally.
     },
   },
 }

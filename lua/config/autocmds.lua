@@ -7,7 +7,22 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function()
-    vim.cmd([[%s/\s\+$//e]])
+    -- Trim trailing whitespace without invoking command-line substitution
+    local bufnr = 0
+    local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+    local changed = false
+    for i, line in ipairs(lines) do
+      local new = line:gsub("%s+$", "")
+      if new ~= line then
+        lines[i] = new
+        changed = true
+      end
+    end
+    if changed then
+      local view = vim.fn.winsaveview()
+      vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+      vim.fn.winrestview(view)
+    end
   end,
 })
 

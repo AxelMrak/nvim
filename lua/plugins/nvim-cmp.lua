@@ -29,6 +29,7 @@ return {
     local has_luasnip, luasnip = pcall(require, "luasnip")
     local cop_ok, cop_sug = pcall(require, "copilot.suggestion")
     local copcmp_ok, copcmp = pcall(require, "copilot_cmp.comparators")
+    local copcmp_src_ok = pcall(require, "copilot_cmp")
 
     local unpack = table.unpack or unpack
 
@@ -64,8 +65,10 @@ return {
     end
 
     local primary_sources = {}
-    -- Copilot first and in its own top group
-    table.insert(primary_sources, { name = "copilot", group_index = 1, keyword_length = 1 })
+    -- Add Copilot CMP source only if available (we default to inline suggestions)
+    if copcmp_src_ok then
+      table.insert(primary_sources, { name = "copilot", group_index = 1, keyword_length = 1 })
+    end
     -- Other sources in secondary group
     table.insert(primary_sources, { name = "nvim_lsp", group_index = 2 })
     if has_luasnip then
@@ -109,6 +112,11 @@ return {
           fallback()
         end, { "i", "s" }),
         ["<Tab>"] = cmp.mapping(function(fallback)
+          -- Prefer accepting Copilot inline suggestion when visible
+          if cop_ok and cop_sug and cop_sug.is_visible() then
+            cop_sug.accept()
+            return
+          end
           if cmp.visible() then
             cmp.select_next_item()
           elseif expand_or_jump() then
@@ -180,7 +188,8 @@ return {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
-      experimental = { ghost_text = true },
+      -- Disable CMP ghost_text to avoid clashing with Copilot inline suggestions
+      experimental = { ghost_text = false },
     })
 
     cmp.setup.cmdline({ "/", "?" }, {
